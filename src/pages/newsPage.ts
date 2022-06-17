@@ -1,5 +1,7 @@
 import axios from "axios";
-import * as  jssoup from '@aghajari/jssoup';
+
+const yourModule = require('@aghajari/jssoup')
+
 export default class News {
     get base_url(): string {
         return this._base_url;
@@ -31,7 +33,7 @@ export default class News {
 
     private refine(html: any) {
         const response = [];
-        const news = jssoup.load(html).find('.sc-2f06e235-12 .eLXeLv');
+        const news = yourModule.load(html).find('.sc-2f06e235-12 .eLXeLv');
         for (let i = 0; i < news.length; i++) {
             const content = news[i].findFirst('.touch-area')
             response.push({title: content.plainText(), link: this._base_url + content.getValue('href')})

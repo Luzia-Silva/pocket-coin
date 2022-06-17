@@ -2,8 +2,7 @@ import { Text } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react';
 import api from "./services/api";
 
-// types coins
-const typeCoins = '/USD-BRL,EUR-BRL,BTC-BRL';
+const typeCoins = '/USD-BRL,EUR-BRL,BTC-BRL,USD-XOF';
 const Conversion = () => {
   const [coins, setCoins] = useState([]);
     useEffect (()=> {
@@ -15,7 +14,7 @@ const Conversion = () => {
     }, [])
     return(
       <Text fontSize='50px' color='White'>
-       {coins?.map()}
+        Bora Codar!
       </Text>
     )
 }
