@@ -29,10 +29,11 @@ const Home: NextPage = () => {
             h="40px" 
             width="100%"
             variant="filled" 
-            type='number' 
+            type='number'
             placeholder='What your money?'/>
             <InputRightElement w={95}>
               <Button
+              type="submit"
               colorScheme='yellow'
               h="40px">
               Pesquisar
@@ -41,9 +42,8 @@ const Home: NextPage = () => {
           </Stack>
         </InputGroup>
       </Container>
-     
     </Flex>
   )
 }
 
-export default Home
+export default Home;
