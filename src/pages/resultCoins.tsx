@@ -7,6 +7,7 @@ Flex,
 Container
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react';
+import News from './newsPage';
 
 const ResultCoins = () => {
   const [coins, setCoins] = useState<any[]>([]);
