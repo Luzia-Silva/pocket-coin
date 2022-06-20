@@ -9,6 +9,7 @@ Text,
 Container } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 
+
 const Home: NextPage = () => {
   return (
     <Flex 
@@ -19,7 +20,7 @@ const Home: NextPage = () => {
      <Container maxW="container.sm" centerContent>
         <Text textAlign="center"
           fontSize='3rem'
-          color='white'
+          color='black'
           fontWeight="bold">
           Pocket Coin
         </Text>
