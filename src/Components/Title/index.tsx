@@ -22,13 +22,13 @@ export default function CallToActionWithAnnotation() {
           as={Box}
           textAlign={'center'}
           spacing={{ base: 4, md: 14 }}
-          py={{ base: 4, md: 4 }}>
+          py={8}>
           <Heading
             fontWeight={600}
             fontSize={{ base: '2xl', sm: '2xl', md: '4xl' }}
             lineHeight={'110%'}>
             Access news in your <br />
-            <Text as={'span'} color={'green.400'}>
+            <Text as={'span'} color={'purple.600'}>
               Pocket Coin
             </Text>
           </Heading>

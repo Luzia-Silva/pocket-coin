@@ -9,6 +9,7 @@ GridItem
 import { useEffect, useState } from 'react';
 
 const ResultCoins = () => {
+  
   const [coins, setCoins] = useState<any[]>([]);
   const [news, setNews] = useState<any[]>([]);
 
@@ -33,7 +34,7 @@ const ResultCoins = () => {
     if (!coins) return <div>Loading...</div>
 
     return (
-        <Container maxW="container.xl" centerContent> 
+        <Container maxW="container.xl"  p={4} centerContent> 
         <Flex 
          direction={['column', 'row']}
           p={2}

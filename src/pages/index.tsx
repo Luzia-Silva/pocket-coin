@@ -10,17 +10,18 @@ Container,
 Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import type { NextPage } from 'next'
+import { useParams } from "react-router-dom";
 
 const Home: NextPage = () => {
   const [amount,  setAmount] = useState()
-
   const onChangeAmount = (e:any) => {
     setAmount(e.target.value)
   }
-  const sendAmount = async (e:any) => {
-    e.preventDefault(); 
+  
+  function sendAmount (){
+      const url = '/amount/?amount=' + amount ;
+      window.open(url)
   }
-      console.log(amount)
   return (
     <Flex 
     justify={["center"]} 
@@ -58,7 +59,8 @@ const Home: NextPage = () => {
               type="submit"
               colorScheme='yellow'
               h="40px"
-               onClick={()=> {alert("Dados enviados com sucesso");}}>
+              onClick={sendAmount}
+              >
               Pesquisar
               </Button>
              </InputRightElement>
