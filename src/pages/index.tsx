@@ -5,36 +5,43 @@ Input,
 InputGroup,
 InputRightElement,
 Stack,
-Text, 
-Container } from '@chakra-ui/react'
+Image,
+Container,
+Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
-  const [amount,  setAmount] = useState('')
+  const [amount,  setAmount] = useState()
 
   const onChangeAmount = (e:any) => {
     setAmount(e.target.value)
   }
   const sendAmount = async (e:any) => {
-    e.preventDefault();
-    console.log(amount)
-    
+    e.preventDefault(); 
   }
+      console.log(amount)
   return (
-    <form onSubmit={sendAmount} method='post'>
     <Flex 
     justify={["center"]} 
-    marginTop="8rem"
+    marginTop="6rem"
     w="100vw"
     >
      <Container maxW="container.sm" centerContent>
-        <Text textAlign="center"
-          fontSize='3rem'
-          color='black'
-          fontWeight="bold">
-          Pocket Coin
+      <Stack direction='row' m={4}>
+        <Image
+          boxSize='60px'
+          objectFit='cover'
+          src='../logo.jpeg'
+          alt='Logo money'
+        />
+         <Text textAlign="center"
+            fontSize='3rem'
+            color='black'
+            fontWeight="bold">
+            Pocket Coin
         </Text>
+        </Stack>
         <InputGroup flexDirection="column"  >
           <Stack spacing={0} direction="row">
             <Input  
@@ -44,13 +51,14 @@ const Home: NextPage = () => {
             type='number'
             name='amount'
             value={amount}
-            onChange={()=> {alert("Eu sou um alert!");}}
+            onChange={onChangeAmount}
             placeholder='What your money?'/>
             <InputRightElement w={95}>
               <Button
               type="submit"
               colorScheme='yellow'
-              h="40px">
+              h="40px"
+               onClick={()=> {alert("Dados enviados com sucesso");}}>
               Pesquisar
               </Button>
              </InputRightElement>
@@ -58,7 +66,6 @@ const Home: NextPage = () => {
         </InputGroup>
       </Container>
     </Flex>
-    </form>
   )
 }
 
