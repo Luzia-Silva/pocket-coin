@@ -11,12 +11,7 @@ import {
 export default function CallToActionWithAnnotation() {
   return (
     <>
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
+
       <Container >
         <Stack
           as={Box}
@@ -25,9 +20,9 @@ export default function CallToActionWithAnnotation() {
           py={8}>
           <Heading
             fontWeight={600}
-            fontSize={{ base: '2xl', sm: '2xl', md: '4xl' }}
+            fontSize={{ base: '2xl', sm: '2xl', md: '2xl' }}
             lineHeight={'110%'}>
-            Access news in your <br />
+            Principais notícias do cenário econômico <br />
             <Text as={'span'} color={'purple.600'}>
               Pocket Coin
             </Text>

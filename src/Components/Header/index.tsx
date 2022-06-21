@@ -15,7 +15,7 @@ const ThreeTierPricingHorizontal = () => {
           <Stack
             textAlign={'center'}>
             <Heading size={'lg'}>
-              You can buy with<Text color={'green.500'}>$100</Text>
+              Você consegue comprar com<Text color={'green.500'}>R$100</Text>
             </Heading>
           </Stack>
         </Stack>

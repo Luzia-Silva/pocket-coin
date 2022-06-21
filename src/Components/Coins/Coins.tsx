@@ -30,16 +30,16 @@ const ResultCoins = () => {
               {coins.map(e => (
               <Stat 
                 p={5}
+                background="white"
                 key={e.coin}
-                 borderWidth='1.8px' 
-                 borderRadius='lg'>
+                 borderRadius='lg'
+                 border='3px solid #ecc94b'>
                       <StatLabel>{e.elements.code}</StatLabel>
                      <StatNumber>${e.elements.bid}</StatNumber>
                   </Stat>
                 ))}
               </Stack>
           </Container>
-          
         </Flex>
      )
 }

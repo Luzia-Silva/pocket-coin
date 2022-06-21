@@ -10,7 +10,6 @@ Container,
 Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import type { NextPage } from 'next'
-import { useParams } from "react-router-dom";
 
 const Home: NextPage = () => {
   const [amount,  setAmount] = useState()

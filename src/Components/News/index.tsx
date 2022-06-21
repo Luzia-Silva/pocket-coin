@@ -1,5 +1,4 @@
 import { 
-Text, 
 Flex, 
 Container,
 Grid,
@@ -23,7 +22,7 @@ const ResultCoins = () => {
     }, [])
 
     useEffect(() => {
-    fetch('http://localhost:3333/crawler')
+    fetch('http://myfarog.com/crawler')
     .then( async response => {
       const json = await response.json();
       setNews(json)
@@ -45,7 +44,7 @@ const ResultCoins = () => {
             rowSpan={2} colSpan={1}
               maxW={'320px'}
               w={'full'}
-              borderWidth='1.8px' 
+              border='3px solid #ecc94b'
               borderRadius='lg'
               p={4}
               textAlign={'center'} 
