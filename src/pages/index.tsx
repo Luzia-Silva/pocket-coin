@@ -10,16 +10,14 @@ Container,
 Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
-  const [amount,  setAmount] = useState()
-  const onChangeAmount = (e:any) => {
-    setAmount(e.target.value)
-  }
+  const [amount,  setAmount] = useState<number>()
   
+  const router = useRouter();
   function sendAmount (){
-      const url = '/amount/?amount=' + amount ;
-      window.open(url)
+    router.push('/result/?amount=' + amount)
   }
   return (
     <Flex 
@@ -51,13 +49,15 @@ const Home: NextPage = () => {
             type='number'
             name='amount'
             value={amount}
-            onChange={onChangeAmount}
-            placeholder='What your money?'/>
+            onChange={(e)=> setAmount(Number(e.target.value))}
+            placeholder='Digite um valor para conversão?'/>
             <InputRightElement w={95}>
               <Button
               type="submit"
-              colorScheme='yellow'
+              colorScheme='purple'
+              color=''
               h="40px"
+              isDisabled={!amount}//desabilitado: espera um valor 
               onClick={sendAmount}
               >
               Pesquisar

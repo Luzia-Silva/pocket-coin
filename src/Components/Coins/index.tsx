@@ -7,9 +7,15 @@ Stat,
 StatNumber,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 const ResultCoins = () => {
+  const router = useRouter();
+
   const [coins, setCoins] = useState<any[]>([]);
+  const [amount, setAmount] = useState<string>(String(router.query?.amount));
+  console.log(router.query?.amount)
+
   useEffect(() => {
     fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL,JPY-EUR' || process.env.API_COINS)
     .then( async response => {
@@ -33,7 +39,7 @@ const ResultCoins = () => {
                 background="white"
                 key={e.coin}
                  borderRadius='lg'
-                 border='3px solid #ecc94b'>
+                 w='9rem'>
                       <StatLabel>{e.elements.code}</StatLabel>
                      <StatNumber>${e.elements.bid}</StatNumber>
                   </Stat>

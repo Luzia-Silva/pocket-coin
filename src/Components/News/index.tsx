@@ -28,7 +28,7 @@ const ResultCoins = () => {
             rowSpan={2} colSpan={1}
               maxW={'320px'}
               w={'full'}
-              border='3px solid #ecc94b'
+              border='3px solid #d1ccbc'
               borderRadius='lg'
               p={4}
               textAlign={'center'} 

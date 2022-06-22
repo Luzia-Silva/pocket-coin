@@ -5,7 +5,11 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-const ThreeTierPricingHorizontal = () => {
+type Title = {
+  text: string;
+}
+
+const ThreeTierPricingHorizontal = ({text}:Title) => {
   return (
     <Box py={3} px={2} >
       <Stack spacing={4} width={'100%'} direction={'column'}>
@@ -14,8 +18,8 @@ const ThreeTierPricingHorizontal = () => {
           alignItems={'center'}>
           <Stack
             textAlign={'center'}>
-            <Heading size={'lg'}>
-              Você consegue comprar com<Text color={'green.500'}>R$100</Text>
+            <Heading size={'lg'} color='#74787a'>
+              Você consegue comprar com<Text color={'#6b46c1'}>R${text}</Text>
             </Heading>
           </Stack>
         </Stack>

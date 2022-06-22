@@ -17,11 +17,13 @@ export default function CallToActionWithAnnotation() {
           as={Box}
           textAlign={'center'}
           spacing={{ base: 4, md: 14 }}
-          py={8}>
+          marginTop={5}>
           <Heading
             fontWeight={600}
-            fontSize={{ base: '2xl', sm: '2xl', md: '2xl' }}
-            lineHeight={'110%'}>
+            fontSize='1.5rem'
+            lineHeight={'110%'}
+            color='#74787a'
+            marginTop={6}>
             Principais notícias do cenário econômico <br />
             <Text as={'span'} color={'purple.600'}>
               Pocket Coin
