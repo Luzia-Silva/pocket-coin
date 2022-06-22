@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 const ResultCoins = () => {
   const [coins, setCoins] = useState<any[]>([]);
   useEffect(() => {
-    fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL,JPY-EUR')
+    fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL,JPY-EUR' || process.env.API_COINS)
     .then( async response => {
       const json = await response.json();
       const arrayAmount:any = Object.entries(json).map(([key, value]) => ({'coin': key, 'elements': value }));
