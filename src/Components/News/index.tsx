@@ -8,29 +8,17 @@ GridItem
 import { useEffect, useState } from 'react';
 
 const ResultCoins = () => {
-  
-  const [coins, setCoins] = useState<any[]>([]);
   const [news, setNews] = useState<any[]>([]);
 
-  useEffect(() => {
-    fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL,USD-XOF')
-    .then( async response => {
-      const json = await response.json();
-      const arrayAmount:any = Object.entries(json).map(([key, value]) => ({'coin': key, 'elements': value }));
-      setCoins(arrayAmount)
-    })
-    }, [])
-
+ 
     useEffect(() => {
-    fetch('http://myfarog.com/crawler')
+    fetch('http://myfarog.com/crawler/')
     .then( async response => {
       const json = await response.json();
       setNews(json)
     })
     }, [])
     
-    
-    if (!coins) return <div>Loading...</div>
 
     return (
         <Container maxW="container.xl"  p={4} centerContent> 
