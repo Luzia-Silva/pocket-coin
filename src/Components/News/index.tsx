@@ -12,8 +12,8 @@ const ResultCoins = () => {
     useEffect(() => {
     fetch('http://myfarog.com/crawler')
     .then( async response => {
-      const data = await response.json();
-      setNews(data)
+      const data = response.json();
+      setNews(await data)
     })
     }, [])
     return (
@@ -32,7 +32,7 @@ const ResultCoins = () => {
               borderRadius='lg'
               p={4}
               textAlign={'center'} 
-              key={e}>
+              key={e.id}>
                 <Link href={e.link} color={'gray.600'}>
                 {e.title}
                 </Link>
