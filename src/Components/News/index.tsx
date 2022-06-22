@@ -9,17 +9,13 @@ import { useEffect, useState } from 'react';
 
 const ResultCoins = () => {
   const [news, setNews] = useState<any[]>([]);
-
- 
     useEffect(() => {
-    fetch('http://myfarog.com/crawler/')
+    fetch('http://myfarog.com/crawler')
     .then( async response => {
-      const json = await response.json();
-      setNews(json)
+      const data = await response.json();
+      setNews(data)
     })
     }, [])
-    
-
     return (
         <Container maxW="container.xl"  p={4} centerContent> 
         <Flex 
@@ -36,7 +32,7 @@ const ResultCoins = () => {
               borderRadius='lg'
               p={4}
               textAlign={'center'} 
-              key={e.coin}>
+              key={e}>
                 <Link href={e.link} color={'gray.600'}>
                 {e.title}
                 </Link>
