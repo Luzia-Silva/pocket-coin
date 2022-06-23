@@ -65,7 +65,9 @@ const Home: NextPage = () => {
              </InputRightElement>
           </Stack>
         </InputGroup>
+                      
       </Container>
+
     </Flex>
   )
 }

@@ -5,6 +5,7 @@ Container,
 StatLabel,
 Stat,
 StatNumber,
+StatHelpText,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react';
 import { Box } from '@chakra-ui/react'
@@ -23,7 +24,7 @@ const Result = () =>{
   console.log(router.query?.amount)
 
   useEffect(() => {
-    fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL,JPY-EUR' || process.env.API_COINS)
+    fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,JPY-BRL,BTC-BRL' || process.env.API_COINS)
     .then( async response => {
       const json = await response.json();
       const arrayAmount:any = Object.entries(json).map(([key, value]) => ({'coin': key, 'elements': value }));
@@ -32,9 +33,14 @@ const Result = () =>{
     }, [])
 
     if (!coins) return <div>Loading...</div>
+    //  console.log(coins.find())
 
     return (
       <>
+        {
+         console.log("tamanho " + coins.length)
+        }
+
         <Navbar />
             <Box background="#beb9b959" p={3}>
             <ThreeTierPricingHorizontal text={amount}/>
@@ -43,15 +49,23 @@ const Result = () =>{
                 p={2}>
                 <Container maxW="container.xl" centerContent>
                   <Stack direction={['column', 'row']} spacing='24px'>
-                    {coins.map(e => (
+                    {coins.map((e, index) => (
                     <Stat 
                       p={5}
                       background="white"
-                      key={e.coin}
+                      key={e}
                       borderRadius='lg'
-                      w='9rem'>
-                            <StatLabel>{e.elements.code}</StatLabel>
-                          <StatNumber>${Math.floor(Number(amount) / e.elements.bid)}</StatNumber>
+                      w='20.6rem'
+                      textAlign="center">
+                            <StatLabel fontSize="1rem">{e.elements.name}</StatLabel>
+                          <StatNumber>
+                            R$ {  index > 2 && 
+                                (Number(amount) / e.elements.bid * 0.001).toFixed(5)
+                                || index <= 2 &&
+                                (Number(amount) / e.elements.bid ).toFixed(2)
+                            }
+                            </StatNumber>
+                             <StatHelpText>{e.elements.create_date}</StatHelpText>
                         </Stat>
                       ))}
                     </Stack>
