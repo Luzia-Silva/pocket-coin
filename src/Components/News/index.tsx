@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 const ResultCoins = () => {
   const [news, setNews] = useState<any[]>([]);
     useEffect(() => {
-    fetch('http://localhost:3333/crawler')
+    fetch('http://localhost:3333/crawler' || 'https://myfarog.com/crawler' || process.env.API_CRAWLER)
     .then( async response => {
       const data = response.json();
       setNews(await data)

@@ -55,7 +55,7 @@ const Result = () =>{
                       background="white"
                       key={e}
                       borderRadius='lg'
-                      w='20.6rem'
+                      w='17rem'
                       textAlign="center">
                             <StatLabel fontSize="1rem">{e.elements.name}</StatLabel>
                           <StatNumber>
