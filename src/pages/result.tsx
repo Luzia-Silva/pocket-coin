@@ -40,7 +40,6 @@ const Result = () =>{
         {
          console.log("tamanho " + coins.length)
         }
-
         <Navbar />
             <Box background="#beb9b959" p={3}>
             <ThreeTierPricingHorizontal text={amount}/>
