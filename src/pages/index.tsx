@@ -24,7 +24,7 @@ const Home: NextPage = () => {
     <>
     <Flex 
     justify={["center"]} 
-    marginTop="4rem"
+    marginTop={{ base: '0', md: '4rem', lg: '4rem' }}
     w="100vw"
     >
      <Container maxW="container.sm" centerContent>
@@ -45,7 +45,7 @@ const Home: NextPage = () => {
         <InputGroup flexDirection="column"  >
           <Stack spacing={0} direction="row">
             <Input  
-            h="40px" 
+            h='40px'
             width="100%"
             variant="filled" 
             type='number'
@@ -60,7 +60,7 @@ const Home: NextPage = () => {
               type="submit"
               colorScheme='purple'
               color=''
-              h="40px"
+              h='40px'
               isDisabled={!amount}//desabilitado: espera um valor 
               onClick={sendAmount}
               >
