@@ -11,6 +11,7 @@ Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router';
+import WithSpeechBubbles from '../Components/Testimonials';
 
 const Home: NextPage = () => {
   const [amount,  setAmount] = useState<number>()
@@ -20,21 +21,22 @@ const Home: NextPage = () => {
     router.push('/result/?amount=' + amount)
   }
   return (
+    <>
     <Flex 
     justify={["center"]} 
-    marginTop="6rem"
+    marginTop="4rem"
     w="100vw"
     >
      <Container maxW="container.sm" centerContent>
       <Stack direction='row' m={4}>
         <Image
-          boxSize='60px'
+          boxSize={{ base: '50px', md: '60px', lg: '60px' }}
           objectFit='cover'
-          src='../logo.jpeg'
+          src='../logo.png'
           alt='Logo money'
         />
          <Text textAlign="center"
-            fontSize='3rem'
+            fontSize={{ base: '2rem', md: '3rem', lg: '3rem' }}
             color='black'
             fontWeight="bold">
             Pocket Coin
@@ -50,7 +52,9 @@ const Home: NextPage = () => {
             name='amount'
             value={amount}
             onChange={(e)=> setAmount(Number(e.target.value))}
-            placeholder='Digite um valor para conversão?'/>
+            focusBorderColor='#6b46c1'
+             _placeholder={{ opacity: 1, fontSize:'13px', color: 'gray.500', }}
+            placeholder="Digite um valor para conversão" />
             <InputRightElement w={95}>
               <Button
               type="submit"
@@ -64,11 +68,11 @@ const Home: NextPage = () => {
               </Button>
              </InputRightElement>
           </Stack>
-        </InputGroup>
-                      
+        </InputGroup>         
       </Container>
-
     </Flex>
+  <WithSpeechBubbles/>
+  </>
   )
 }
 

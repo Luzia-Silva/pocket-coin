@@ -6,6 +6,9 @@ StatLabel,
 Stat,
 StatNumber,
 StatHelpText,
+useColorModeValue,
+chakra,
+Avatar,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react';
 import { Box } from '@chakra-ui/react'
@@ -33,13 +36,9 @@ const Result = () =>{
     }, [])
 
     if (!coins) return <div>Loading...</div>
-    //  console.log(coins.find())
-
+  
     return (
       <>
-        {
-         console.log("tamanho " + coins.length)
-        }
         <Navbar />
             <Box background="#beb9b959" p={3}>
             <ThreeTierPricingHorizontal text={amount}/>
@@ -50,21 +49,21 @@ const Result = () =>{
                   <Stack direction={['column', 'row']} spacing='24px'>
                     {coins.map((e, index) => (
                     <Stat 
-                      p={5}
+                      p={{sm: '0.5rem', base: '1rem', md: '0.8rem', lg: '1rem' }}
                       background="white"
                       key={e}
                       borderRadius='lg'
-                      w='17rem'
+                      w={{sm: '100px', base: '300px', md: '150px', lg: '250px' }}
                       textAlign="center">
-                            <StatLabel fontSize="1rem">{e.elements.name}</StatLabel>
-                          <StatNumber>
-                            R$ {  index > 2 && 
+                            <StatLabel fontSize={{sm:'12px', base: '18px', md: '14px', lg: '14px' }}>{e.elements.name}</StatLabel>
+                          <StatNumber fontSize={{sm:'14px', base: '20px', md: '18px', lg: '25px' }}>
+                            {  index > 2 && 
                                 (Number(amount) / e.elements.bid * 0.001).toFixed(5)
                                 || index <= 2 &&
                                 (Number(amount) / e.elements.bid ).toFixed(2)
                             }
                             </StatNumber>
-                             <StatHelpText>{e.elements.create_date}</StatHelpText>
+                             <StatHelpText  m={1} fontSize={{sm:'10px', base: '16x', md: '12px', lg: '14px' }}>{e.elements.create_date}</StatHelpText>
                         </Stat>
                       ))}
                     </Stack>
@@ -72,7 +71,9 @@ const Result = () =>{
               </Flex>
             </Box>
           <Title/>
-      <News/>
+    
+    
+    <News/>
 
       </>
      )

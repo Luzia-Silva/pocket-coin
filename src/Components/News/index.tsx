@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 const ResultCoins = () => {
   const [news, setNews] = useState<any[]>([]);
     useEffect(() => {
-    fetch(process.env.NEXT_PUBLIC_API_CRAWLER || 'https://myfarog.com/crawler'  )
+    fetch('http://localhost:3333/crawler')
     .then( async response => {
       const data = response.json();
       setNews(await data)
@@ -22,21 +22,26 @@ const ResultCoins = () => {
          direction={['column', 'row']}
           p={2}
         hidden={false}>
-          <Grid  templateRows="repeat(2, 1fr)" templateColumns='repeat(3, 1fr)' gap={2} >
+          <Grid  templateColumns={{ base: 'repeat(1,1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }} gap={4} >
             {news.map(e => (
-            <GridItem
-            rowSpan={2} colSpan={1}
-              maxW={'320px'}
-              w={'full'}
-              border='3px solid #d1ccbc'
-              borderRadius='lg'
-              p={4}
-              textAlign={'center'} 
-              key={e.id}>
-                <Link href={e.link} color={'gray.600'}>
+          <Flex
+         boxShadow={'lg'}
+                  maxW={'640px'}
+                  width={'full'}
+                  rounded={'xl'}
+                  p={5}
+                  justifyContent={'center'}
+                  position={'relative'}
+                  bg={'white'}
+                  border="2px solid #8376767a"
+                  text-align="center"
+                key={e.id}>
+                <Link href={e.link} 
+                textAlign="center" 
+                color={'gray.600'}>
                 {e.title}
                 </Link>
-              </GridItem>
+              </Flex>
                 ))}
 
   

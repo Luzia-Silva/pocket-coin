@@ -1,7 +1,8 @@
+import { ArrowBackIcon, SearchIcon } from '@chakra-ui/icons';
 import {
   Box,
   Flex, Link, Stack,
-  useColorMode, useColorModeValue, useDisclosure, Image
+  useColorMode, useColorModeValue, useDisclosure, Image, IconButton, Avatar, Text
 } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
@@ -27,15 +28,17 @@ export default function Nav() {
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <Box>
             <Link href={'/'}>
-            <Image
-            boxSize="170px"
-            src='../../coin.svg'
-            alt='Dan Abramov'/>
+              <Avatar bg='#e8e7e7' icon={<ArrowBackIcon fontSize='1.5rem' />} />
             </Link>
           </Box>
-
-          <Flex alignItems={'center'}>
+          <Flex >
             <Stack direction={'row'} spacing={7}>
+             <Text textAlign="right"
+            fontSize={'1.5rem'}
+            color='white'
+            fontWeight="bold">
+            Pocket Coin
+        </Text>
             </Stack>
           </Flex>
         </Flex>
