@@ -6,10 +6,5 @@ npm run dev
 yarn dev
 ```
 
-## Front-End
-
-<img src="../screen/screenPage.PNG" >
-</br>
-<img src="../screen/screenPage2.PNG">
-</br>
-<img src="../screen/screenPage3.PNG'>
+## Conheça o projeto 😍
+![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
