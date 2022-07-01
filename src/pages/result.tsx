@@ -6,9 +6,6 @@ StatLabel,
 Stat,
 StatNumber,
 StatHelpText,
-useColorModeValue,
-chakra,
-Avatar,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react';
 import { Box } from '@chakra-ui/react'
@@ -18,13 +15,15 @@ import News from '../Components/News'
 import Title from '../Components/Title'
 import { useRouter } from 'next/router';
 
-
 const Result = () =>{
   const router = useRouter();
 
   const [coins, setCoins] = useState<any[]>([]);
-  const [amount, setAmount] = useState<string>(String(router.query?.amount));
-  console.log(router.query?.amount)
+  const [amount, setAmount] = useState<number>();
+      useEffect( ()=>{
+          setAmount(Number(router.query?.amount))
+      }, [router.query?.amount])
+
 
   useEffect(() => {
     fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,JPY-BRL,BTC-BRL' || process.env.API_COINS)
@@ -40,8 +39,8 @@ const Result = () =>{
     return (
       <>
         <Navbar />
-            <Box background="#beb9b959" p={3}>
-            <ThreeTierPricingHorizontal text={amount}/>
+            <Box background={'#beb9b959'} p={3}>
+            <ThreeTierPricingHorizontal text={String(amount)}/>
               <Flex 
                 justify={["center"]} 
                 p={2}>
@@ -50,10 +49,10 @@ const Result = () =>{
                     {coins.map((e, index) => (
                     <Stat 
                       p={{sm: '0.5rem', base: '1rem', md: '0.8rem', lg: '1rem' }}
-                      background="white"
+                      backgroundColor='white'
                       key={e}
                       borderRadius='lg'
-                      w={{sm: '100px', base: '300px', md: '150px', lg: '250px' }}
+                      w={{sm: '100px', base: '380px', md: '150px', lg: '250px' }}
                       textAlign="center">
                             <StatLabel fontSize={{sm:'12px', base: '18px', md: '14px', lg: '14px' }}>{e.elements.name}</StatLabel>
                           <StatNumber fontSize={{sm:'14px', base: '20px', md: '18px', lg: '25px' }}>
@@ -71,10 +70,7 @@ const Result = () =>{
               </Flex>
             </Box>
           <Title/>
-    
-    
-    <News/>
-
+         <News/>
       </>
      )
     }
