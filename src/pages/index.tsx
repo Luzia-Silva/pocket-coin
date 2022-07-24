@@ -13,6 +13,8 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router';
 import WithSpeechBubbles from '../Components/Testimonials';
 
+
+
 const Home: NextPage = () => {
   const [amount,  setAmount] = useState<number>()
   
