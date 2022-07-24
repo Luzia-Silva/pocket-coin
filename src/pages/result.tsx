@@ -24,8 +24,7 @@ const Result = () =>{
           setAmount(Number(router.query?.amount))
       }, [router.query?.amount])
 
-
-  useEffect(() => {
+    useEffect(() => {
     fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,JPY-BRL,BTC-BRL' || process.env.API_COINS)
     .then( async response => {
       const json = await response.json();
