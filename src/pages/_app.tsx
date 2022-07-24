@@ -1,12 +1,23 @@
 import type { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
 import {theme} from '../styles/theme'
-import ReactGA from 'react-ga';
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import * as gtag from "../utils/gtag";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  
-  ReactGA.initialize('G-9G079J9GM7');
-  ReactGA.pageview(window.location.pathname + window.location.search);
+   const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = (url: URL) => {
+      gtag.pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
+
   return (
     <ChakraProvider theme={theme}>
       <Component {...pageProps} />
