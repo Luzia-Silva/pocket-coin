@@ -8,22 +8,31 @@ Stack,
 Image,
 Container,
 Text } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router';
 import WithSpeechBubbles from '../Components/Testimonials';
+import LoggedUser from '../Components/LoggedUser';
+import { Users } from '../mock';
 
 
 
 const Home: NextPage = () => {
-  const [amount,  setAmount] = useState<number>()
-  
   const router = useRouter();
-  function sendAmount (){
-    router.push('/result/?amount=' + amount)
+  const [amount,  setAmount] = useState<number>()
+  const [ loggedInUser, setLoggedInUser] = useState(false)
+  const {loggeduser } = router.query
+  useEffect(() => {
+    if(Users.id === loggeduser) setLoggedInUser(true)
+  }, [loggeduser, router.query])
+
+  const sendAmount =  () => {
+    router.push('/result/?amount=' + amount )
   }
+  
   return (
     <>
+   {loggedInUser && <LoggedUser username={String(Users.surname)} avatarUser="https://avatars.dicebear.com/api/big-smile/your-custom-seed.svg?b=%23ff00d0" />}
     <Flex 
     justify={["center"]} 
     marginTop={{ base: '0', md: '4rem', lg: '4rem' }}
@@ -63,7 +72,7 @@ const Home: NextPage = () => {
               colorScheme='purple'
               color=''
               h='40px'
-              isDisabled={!amount}//desabilitado: espera um valor 
+              isDisabled={!amount}
               onClick={sendAmount}
               >
               Pesquisar
