@@ -1,13 +1,13 @@
-import type { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
-import { theme } from '../styles/theme'
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
-import * as gtag from '../utils/gtag'
-import Navbar from '../Components/Navbar'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ToastContainer, toast } from 'react-toastify'
+import type { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import Navbar from '../Components/Navbar'
+import { theme } from '../styles/theme'
+import * as gtag from '../utils/gtag'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -23,13 +23,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router.events])
 
   return (
+
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={theme}>
         <Navbar />
-         <ToastContainer />
-        <Component {...pageProps}/>
+        <ToastContainer />
+        <Component {...pageProps} />
       </ChakraProvider>
     </QueryClientProvider>
+
+
   )
 }
 

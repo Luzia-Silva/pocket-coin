@@ -1,6 +1,6 @@
 import {
   Avatar, Box, Button, Center, Flex, Link, Menu,
-  MenuButton, MenuDivider, MenuItem, MenuList, Stack,
+  MenuButton, MenuItem, MenuList, Stack,
   useColorMode, useDisclosure
 } from '@chakra-ui/react'
 
@@ -40,7 +40,7 @@ const LoggedUser = ({username, avatarUser}:Props) => {
                     <p>{username}</p>
                   </Center>
                   <br />
-                  <MenuDivider />
+              
                   <Link href='/'>
                     <MenuItem>Sair</MenuItem>
                   </Link>

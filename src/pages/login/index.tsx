@@ -3,24 +3,18 @@ import {
   Button,
   Container,
   Flex,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
+  FormControl, FormLabel,
   Heading,
   Input,
   Link,
-  Stack,
-  useColorModeValue,
-  Text
+  Stack, Text, useColorModeValue
 } from '@chakra-ui/react'
-import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import YupPassword from 'yup-password'
-import * as yup from 'yup'
-import { toast } from 'react-toastify'
-import { Users } from '../../mock'
-import React from 'react'
 import { useRouter } from 'next/router'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import * as yup from 'yup'
+import { Users } from '../../mock'
 
 interface IFormInputs {
   email: string

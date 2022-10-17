@@ -6,7 +6,7 @@ export const Users: IUSers = {
     surname: "Lu",
     email: "aluziagabriela@gmail.com",
     password:"123456", 
-    typeAmount: "USD-BRL,EUR-BRL,JPY-BRL,BTC-BRL",
+    typeAmount: "USD-BRL,EUR-BRL,JPY-BRL,BTC-BRL,MXN,ARS,CNY,CAD",
     avatarUser: 'https://avatars.dicebear.com/api/big-smile/your-custom-seed.svg?b=%23ff0066',
     category: [
       "internacionais", 

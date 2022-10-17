@@ -1,4 +1,4 @@
-import { GetAmount } from "./api/getCoins";
+import { GetCoins } from "./api/getCoins";
 
 
-export { GetAmount }
+export { GetCoins }
