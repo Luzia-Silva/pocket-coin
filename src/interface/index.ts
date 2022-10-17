@@ -1,6 +1,8 @@
+import { INews } from './INews/index';
 import { IUSers } from './IUsers/index';
-import { IAmount } from './IAmount/index';
+import { ICoins } from './ICoins/index';
 export type {
-  IAmount, 
-  IUSers
+  ICoins, 
+  IUSers, 
+  INews
 }

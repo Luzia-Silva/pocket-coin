@@ -1,18 +1,16 @@
-import { json } from 'stream/consumers'
-
+import { ICoins } from './../../../interface/ICoins/index';
 import { createUseUserskey } from './keys'
-
 import { useQuery, UseQueryOptions } from '@tanstack/react-query'
-import { IAmount } from '../../../interface'
+
 import { api } from '..'
-export const GetAmount = (
+export const GetCoins = (
   typecoins: string,
-  options?: UseQueryOptions<IAmount>
+  options?: UseQueryOptions<ICoins>
 ) => {
   return useQuery(
     createUseUserskey(),
     () =>
-      api.get(`/${typecoins}`).then((response) => response.data),
+      api.get<ICoins>(`/${typecoins}`).then((response) => response.data),
     options
   )
 }

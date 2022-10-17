@@ -6,4 +6,5 @@ export interface IUSers {
   password: string
   typeAmount?: string
   avatarUser?: string
+  category?: string[]
 }

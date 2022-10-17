@@ -1,4 +1,4 @@
-export type IAmount = {
+export type ICoins = {
   elements: any
   key: any
   code: string

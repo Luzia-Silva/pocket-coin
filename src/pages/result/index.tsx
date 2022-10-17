@@ -1,20 +1,20 @@
 import {
-  Box,
-  Flex,
+  Box, Container, Flex,
   Stack,
   Stat,
   StatHelpText,
   StatLabel,
-  StatNumber,
-  Container
+  StatNumber
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import ThreeTierPricingHorizontal from '../../Components/Header'
 import LoggedUser from '../../Components/LoggedUser'
-import Title from '../../Components/Title'
+import AllNews from '../../Components/AllNews'
 import { Users } from '../../mock'
-import { GetAmount } from '../../services'
+import { GetCoins } from '../../services/api/getCoins'
+import CategoryNews from '../../Components/categoryNews'
+
 
 const Result = () => {
   const router = useRouter()
@@ -24,8 +24,9 @@ const Result = () => {
   useEffect(() => {
     if (Users.id === loggeduser) setLoggedInUser(true)
   }, [loggeduser, router.query])
-  const { data, isLoading, isError } = GetAmount(String(Users.typeAmount))
+  const { data, isLoading, isError } = GetCoins(String(Users.typeAmount))
   const ObjectCoinsValues = Object.values(Object(data))
+  
   const coins = Object.entries(ObjectCoinsValues).map(([key, value]) => ({
     key: key,
     elements: value
@@ -94,7 +95,8 @@ const Result = () => {
           </Container>
         </Flex>
       </Box>
-      <Title />
+      {/* <AllNews/> */}
+      <CategoryNews/>
     </>
   )
 }
