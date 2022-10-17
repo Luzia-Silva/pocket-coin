@@ -9,7 +9,7 @@ export const Users: IUSers = {
     typeAmount: "USD-BRL,EUR-BRL,JPY-BRL,BTC-BRL",
     avatarUser: 'https://avatars.dicebear.com/api/big-smile/your-custom-seed.svg?b=%23ff0066',
     category: [
-      "internacionas", 
+      "internacionais", 
       "sociais"
     ]
   }

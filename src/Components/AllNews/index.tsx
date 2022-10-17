@@ -2,6 +2,7 @@ import { Flex, Container, Grid, Link, GridItem } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { INews } from '../../interface'
 import { GetNews } from '../../services/api/getNews'
+import CardNews from '../CardNews'
 import Title from '../Title'
 
 const AllNews = () => {
@@ -9,7 +10,7 @@ const AllNews = () => {
   console.log(newsAll)
   return (
     <Container maxW='container.xl' p={4} centerContent>
-      <Title />
+      <Title title={'Principais notícias do cenário econômico'} />
       <Flex direction={['column', 'row']} p={2} hidden={false}>
         <Grid
           templateColumns={{
@@ -20,23 +21,7 @@ const AllNews = () => {
           gap={4}
         >
           {newsAll?.map(news => (
-            <Flex
-              key={news?.id}
-              boxShadow={'lg'}
-              maxW={'640px'}
-              width={'full'}
-              rounded={'xl'}
-              p={5}
-              justifyContent={'center'}
-              position={'relative'}
-              bg={'white'}
-              border='2px solid #8376767a'
-              text-align='center'
-            >
-              <Link href={news?.link} textAlign='center' color={'gray.600'}>
-                {news?.title}
-              </Link>
-            </Flex>
+            <CardNews key={news.id} title={news.title} link={news.link} />
           ))}
         </Grid>
       </Flex>

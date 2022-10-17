@@ -95,7 +95,7 @@ const Result = () => {
           </Container>
         </Flex>
       </Box>
-      {/* <AllNews/> */}
+    
       <CategoryNews/>
     </>
   )
