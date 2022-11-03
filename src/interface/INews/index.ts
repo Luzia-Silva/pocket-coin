@@ -1,6 +1,5 @@
-export interface INews  {
-  id?:number
+export interface INews {
   title: string
-  link:string
-  category:string | string []
+  link: string
+  category: string
 }

@@ -14,22 +14,23 @@ import {
   Container
 } from '@chakra-ui/react'
 import e from 'express'
-import { useEffect, useState } from 'react'
+import { Key, useEffect, useState } from 'react'
 import { capitalize } from 'vue'
 import { INews } from '../../interface'
 import { News, Users } from '../../mock'
+import { queries } from '../../services/queries'
 import CardNews from '../CardNews'
 import Title from '../Title'
 
 const CategoryNews = () => {
   const [newsRead, setNewsRead] = useState<String>('')
-  //  const {data:newsAll} = GetNews()
+  const { data: newsAll } = queries.GetNews()
 
   const newsReadUser: INews[] = []
-  News?.forEach(newsCategory => {
+  newsAll?.forEach(newsCategory => {
     if (
       Users?.category?.includes(
-        newsCategory?.category.toString().toLocaleLowerCase()
+        newsCategory?.category
       )
     ) {
       newsReadUser.push(newsCategory)
@@ -39,17 +40,20 @@ const CategoryNews = () => {
   function handleClickNews(props: string) {
     setNewsRead(props)
   }
+  
   return (
     <>
       <Title title={'Notícias relacionadas a sua preferência'} />
       <Tabs variant='soft-rounded' colorScheme='purple' isLazy m={2}>
         <TabList>
           <Tab onClick={() => handleClickNews('')}>Todas</Tab>
-          {Users.category?.map((category, index) => (
-            <Tab key={index} onClick={() => handleClickNews(category)}>
-              {capitalize(category)}
-            </Tab>
-          ))}
+          {Users.category?.map(
+            (category: string, index: Key | null | undefined) => (
+              <Tab key={index} onClick={() => handleClickNews(category)}>
+                {capitalize(category)}
+              </Tab>
+            )
+          )}
         </TabList>
         {!newsRead ? (
           <TabPanels flexDirection={['column', 'row']} p={2} hidden={false}>

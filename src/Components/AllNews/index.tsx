@@ -1,12 +1,11 @@
-import { Flex, Container, Grid, Link, GridItem } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
-import { INews } from '../../interface'
-import { GetNews } from '../../services/api/getNews'
+import { Container, Flex, Grid } from '@chakra-ui/react'
+import { queries } from '../../services/queries'
+
 import CardNews from '../CardNews'
 import Title from '../Title'
 
 const AllNews = () => {
-  const { data: newsAll } = GetNews()
+  const { data: newsAll } = queries.GetNews()
   console.log(newsAll)
   return (
     <Container maxW='container.xl' p={4} centerContent>
@@ -20,8 +19,8 @@ const AllNews = () => {
           }}
           gap={4}
         >
-          {newsAll?.map(news => (
-            <CardNews key={news.id} title={news.title} link={news.link} />
+          {newsAll?.map((news, index) => (
+            <CardNews key={index} title={news.title} link={news.link} />
           ))}
         </Grid>
       </Flex>

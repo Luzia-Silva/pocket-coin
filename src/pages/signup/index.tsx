@@ -1,25 +1,75 @@
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import {
-  Flex,
   Box,
+  Button,
+  Flex,
   FormControl,
   FormLabel,
+  Heading,
+  HStack,
   Input,
   InputGroup,
-  HStack,
   InputRightElement,
-  Stack,
-  Button,
-  Heading,
-  Text,
-  useColorModeValue,
   Link,
+  Stack,
+  Text,
+  useColorModeValue
 } from '@chakra-ui/react'
 import { useState } from 'react'
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 
+import { yupResolver } from '@hookform/resolvers/yup'
+import { AxiosError } from 'axios'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import * as yup from 'yup'
+import { IUser } from '../../interface'
+import { queries } from '../../services/queries'
+
+const schema = yup
+  .object({
+    name: yup.string().required(),
+    email: yup
+      .string()
+      .email()
+      .required(),
+    password: yup
+      .string()
+      .required()
+      .min(5),
+    surname: yup.string().required(),
+    confirmPassword: yup
+                .string()
+                .required()
+                .oneOf([yup.ref("password")], "Passwords do not match"),
+  })
+  .required()
 const SignUp = () => {
+  const { mutate } = queries.CreateUser({
+    onSuccess: () => {
+      toast.success('Consentimento criado!')
+    },
+    onError: (error: AxiosError) => {
+      console.log('This Error: ', error)
+    }
+  })
+  const data: IUser = {
+    name: 'luzia Gabriela',
+    surname: 'Luluca',
+    category: ['Pop', 'Mundo', 'Mercados'],
+    email: 'aluziagabriela@gmail.com',
+    password: '123456'
+  }
+  const onSubmit = (data: IUser) => {
+    mutate(data)
+  }
   const [showPassword, setShowPassword] = useState(false)
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<IUser>({
+    resolver: yupResolver(schema)
+  })
   return (
     <Flex
       align={'center'}
@@ -42,34 +92,35 @@ const SignUp = () => {
           boxShadow={'lg'}
           p={8}
         >
-          <Stack spacing={4}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <HStack>
               <Box>
                 <FormControl id='firstName' isRequired>
                   <FormLabel>Nome</FormLabel>
-                  <Input type='text' />
+                  <Input type='text' {...register('name')} />
                 </FormControl>
               </Box>
               <Box>
                 <FormControl id='surname'>
                   <FormLabel>Apelido </FormLabel>
-                  <Input type='text' />
+                  <Input type='text' {...register('surname')} />
                 </FormControl>
               </Box>
             </HStack>
             <FormControl id='email' isRequired>
               <FormLabel>Email </FormLabel>
-              <Input type='email' />
+              <Input type='email' {...register('email')} />
             </FormControl>
-            <FormControl id='password' isRequired>
+            <FormControl isRequired>
               <FormLabel>Senha</FormLabel>
               <InputGroup>
                 <Input type={showPassword ? 'text' : 'password'} />
                 <InputRightElement h={'full'}>
                   <Button
                     variant={'ghost'}
+                    type='submit'
                     onClick={() =>
-                      setShowPassword((showPassword) => !showPassword)
+                      setShowPassword(showPassword => !showPassword)
                     }
                   >
                     {showPassword ? <ViewIcon /> : <ViewOffIcon />}
@@ -78,20 +129,20 @@ const SignUp = () => {
               </InputGroup>
             </FormControl>
             <Stack spacing={10} pt={2}>
-              <Button loadingText='Submitting' size='lg' colorScheme='purple'>
+              <Button
+                loadingText='Submitting'
+                size='lg'
+                colorScheme='purple'
+                type='submit'
+              >
                 Confirmar
               </Button>
             </Stack>
-          </Stack>
+          </form>
         </Box>
         <Text align={'center'} textAlign='center'>
           Já está cadastrado ?
-          <Link
-            color='purple.500'
-            href='login'
-            fontWeight={700}
-            fontSize='md'
-          >
+          <Link color='purple.500' href='login' fontWeight={700} fontSize='md'>
             {' '}
             Login
           </Link>
