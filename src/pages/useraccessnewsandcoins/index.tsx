@@ -10,13 +10,15 @@ import { queries } from '../../services/queries'
 const UserAccessNewsAndCoins = () => {
   const { data: news } = queries.GetNews()
   const { data: coins } = queries.GetAmounts()
-  const [amount, setAmount] = useState<string>('')
+  const [amountUser, setAmountUser] = useState<any>()
   useEffect(() => {
-    return setAmount(localStorage.getItem('amount') || '')
+    setAmountUser(localStorage.getItem('amount'))
   }, [])
+  console.log(amountUser)
   return (
     <>
-      <Amount amounts={coins || []} />
+    
+      <Amount amounts={coins || []} amountUser={amountUser} />
       <CategoryNewsTabList user={Users} newsAll={news || []} />
     </>
   )
