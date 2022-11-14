@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Link } from '@chakra-ui/react'
+import { Flex, Link } from '@chakra-ui/react'
 
 type Props = {
   title: string

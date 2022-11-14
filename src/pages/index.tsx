@@ -1,47 +1,28 @@
 import {
   Button,
+  Container,
   Flex,
+  Image,
   Input,
   InputGroup,
   InputRightElement,
   Stack,
-  Image,
-  Container,
-  Text
+  Text,
 } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
-
-import WithSpeechBubbles from '../Components/Testimonials'
-import LoggedUser from '../Components/LoggedUser'
-import { Users } from '../mock'
-import { NextPage } from 'next/types'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { NextPage } from 'next/types'
+import WithSpeechBubbles from '../Components/Testimonials'
 
 const Home: NextPage = () => {
   const router = useRouter()
-  const [amount, setAmount] = useState<number>()
-  const [loggedInUser, setLoggedInUser] = useState(false)
-  const { loggeduser } = router.query
-  useEffect(() => {
-    if (Users.id === loggeduser) setLoggedInUser(true)
-  }, [loggeduser, router.query])
-
-  const sendAmount = () => {
-    if (loggedInUser)
-      router.push(
-        '/result/?loggeduser=' + Users.id + '&amount=' + amount
-      )
-    else router.push('/result/?amount=' + amount)
+  const [amount, setAmount] = useState<string>('')
+  const handleLocalStorage = () => {
+    localStorage.setItem('amount', amount)
+    router.push('/useraccessnewsandcoins')
   }
-
   return (
     <>
-      {loggedInUser && (
-        <LoggedUser
-          username={String(Users.surname)}
-          avatarUser='https://avatars.dicebear.com/api/big-smile/your-custom-seed.svg?b=%23ff00d0'
-        />
-      )}
       <Flex
         justify={['center']}
         marginTop={{ base: '0', md: '4rem', lg: '4rem' }}
@@ -73,12 +54,12 @@ const Home: NextPage = () => {
                 type='number'
                 name='amount'
                 value={amount}
-                onChange={e => setAmount(Number(e.target.value))}
+                onChange={(e) => setAmount(e.target.value)}
                 focusBorderColor='#6b46c1'
                 _placeholder={{
                   opacity: 1,
                   fontSize: '13px',
-                  color: 'gray.500'
+                  color: 'gray.500',
                 }}
                 placeholder='Digite um valor para conversão'
               />
@@ -89,7 +70,7 @@ const Home: NextPage = () => {
                   color=''
                   h='40px'
                   isDisabled={!amount}
-                  onClick={sendAmount}
+                  onClick={handleLocalStorage}
                 >
                   Pesquisar
                 </Button>

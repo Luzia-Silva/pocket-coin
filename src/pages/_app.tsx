@@ -4,14 +4,16 @@ import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
+
 import 'react-toastify/dist/ReactToastify.css'
 import Navbar from '../Components/Navbar'
 import { theme } from '../styles/theme'
 import * as gtag from '../utils/gtag'
+const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
-  const queryClient = new QueryClient()
+
   useEffect(() => {
     const handleRouteChange = (url: URL) => {
       gtag.pageview(url)
@@ -23,7 +25,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router.events])
 
   return (
-
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={theme}>
         <Navbar />
@@ -31,8 +32,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </ChakraProvider>
     </QueryClientProvider>
-
-
   )
 }
 
