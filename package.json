@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@aghajari/jssoup": "^1.0.2",
     "@chakra-ui/icons": "^2.0.2",
     "@chakra-ui/react": "^2.2.1",
     "@emotion/react": "^11",
@@ -17,7 +16,6 @@
     "axios": "^0.27.2",
     "express": "^4.17.13",
     "framer-motion": "^6",
-    "jssoup": "^0.0.15",
     "lib": "^4.3.3",
     "next": "12.1.6",
     "react": "18.2.0",
@@ -25,8 +23,7 @@
     "react-ga": "^3.3.1",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0",
-    "react-slick": "^0.29.0",
-    "styled-components": "^5.3.5"
+    "react-slick": "^0.29.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
