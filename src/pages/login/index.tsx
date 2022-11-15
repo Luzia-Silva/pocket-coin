@@ -3,18 +3,23 @@ import {
   Button,
   Container,
   Flex,
-  FormControl, FormLabel,
+  FormControl,
+  FormLabel,
   Heading,
   Input,
   Link,
-  Stack, Text, useColorModeValue
+  Stack,
+  Text,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { AxiosError } from 'axios'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import * as yup from 'yup'
 import { Users } from '../../mock'
+import { queries } from '../../services/queries'
 
 interface IFormInputs {
   email: string
@@ -23,49 +28,41 @@ interface IFormInputs {
 
 const schema = yup
   .object({
-    email: yup
-      .string()
-      .email()
-      .required('Informe o seu email'),
-    password: yup.string().required('Informe a sua senha')
+    email: yup.string().email().required('Informe o seu email'),
+    password: yup.string().required('Informe a sua senha'),
   })
   .required()
 
 const Login = () => {
   const router = useRouter()
+  const { mutate } = queries.AuthUser({
+    onSuccess: () => {
+      // router.push('/welcome')
+      toast.success('sucesso')
+    },
+    onError: (error: AxiosError) => {
+      switch (error.code) {
+        case 'ERR_BAD_REQUEST':
+          toast.error('Não encontramos o seu login!')
+          break
+        case 'ERR_NETWORK':
+          toast.error('Senha incorreta!')
+          break
+        default:
+          toast.error('Ocorreu um erro!')
+          break
+      }
+    },
+  })
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<IFormInputs>({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
   })
-  const onSubmit = (data: IFormInputs) => {
-    if (Users.email === data.email && Users.password === data.password)
-      router.push('/?loggeduser=' + Users.id)
-    else if (Users.email === data.email && Users.password !== data.password)
-      toast.error('Senha incorreta! ', {
-        position: 'bottom-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored'
-      })
-    else
-      toast.error('Não encontramos o seu cadastro!', {
-        position: 'bottom-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored'
-      })
-  }
+
+  const onSubmit = (data: IFormInputs) => mutate(data)
 
   return (
     <Container>

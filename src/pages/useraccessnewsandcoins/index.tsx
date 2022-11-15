@@ -14,10 +14,9 @@ const UserAccessNewsAndCoins = () => {
   useEffect(() => {
     setAmountUser(localStorage.getItem('amount'))
   }, [])
-  console.log(amountUser)
+
   return (
     <>
-    
       <Amount amounts={coins || []} amountUser={amountUser} />
       <CategoryNewsTabList user={Users} newsAll={news || []} />
     </>

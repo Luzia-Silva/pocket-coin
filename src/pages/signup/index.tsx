@@ -13,63 +13,48 @@ import {
   Link,
   Stack,
   Text,
-  useColorModeValue
+  useColorModeValue,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { AxiosError } from 'axios'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import * as yup from 'yup'
 import { IUser } from '../../interface'
 import { queries } from '../../services/queries'
+import { Router } from 'express'
+import { useRouter } from 'next/router'
 
 const schema = yup
   .object({
     name: yup.string().required(),
-    email: yup
-      .string()
-      .email()
-      .required(),
-    password: yup
-      .string()
-      .required()
-      .min(5),
+    email: yup.string().email().required(),
+    password: yup.string().required().min(5),
     surname: yup.string().required(),
-    confirmPassword: yup
-                .string()
-                .required()
-                .oneOf([yup.ref("password")], "Passwords do not match"),
   })
   .required()
 const SignUp = () => {
+  const router = useRouter()
   const { mutate } = queries.CreateUser({
     onSuccess: () => {
-      toast.success('Consentimento criado!')
+      router.push('/welcome')
     },
     onError: (error: AxiosError) => {
-      console.log('This Error: ', error)
-    }
+      switch (error.code) {
+        case 'ERR_BAD_REQUEST':
+          toast.warning('Esse usuário já existe em nossa base!')
+          break
+        default:
+          toast.error('Ocorreu um erro!')
+          break
+      }
+    },
   })
-  const data: IUser = {
-    name: 'luzia Gabriela',
-    surname: 'Luluca',
-    category: ['Pop', 'Mundo', 'Mercados'],
-    email: 'aluziagabriela@gmail.com',
-    password: '123456'
-  }
-  const onSubmit = (data: IUser) => {
-    mutate(data)
-  }
   const [showPassword, setShowPassword] = useState(false)
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<IUser>({
-    resolver: yupResolver(schema)
-  })
+  const { register, handleSubmit } = useForm<IUser>()
+  const onSubmit: SubmitHandler<IUser> = (data) => mutate(data)
   return (
     <Flex
       align={'center'}
@@ -114,13 +99,16 @@ const SignUp = () => {
             <FormControl isRequired>
               <FormLabel>Senha</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'} />
+                <Input
+                  type={showPassword ? 'text' : 'password'}
+                  {...register('password')}
+                />
                 <InputRightElement h={'full'}>
                   <Button
                     variant={'ghost'}
                     type='submit'
                     onClick={() =>
-                      setShowPassword(showPassword => !showPassword)
+                      setShowPassword((showPassword) => !showPassword)
                     }
                   >
                     {showPassword ? <ViewIcon /> : <ViewOffIcon />}
@@ -129,12 +117,7 @@ const SignUp = () => {
               </InputGroup>
             </FormControl>
             <Stack spacing={10} pt={2}>
-              <Button
-                loadingText='Submitting'
-                size='lg'
-                colorScheme='purple'
-                type='submit'
-              >
+              <Button size='lg' colorScheme='purple' type='submit'>
                 Confirmar
               </Button>
             </Stack>

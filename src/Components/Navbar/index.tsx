@@ -9,7 +9,7 @@ import {
   Stack,
   Text,
   useColorMode,
-  useDisclosure
+  useDisclosure,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
@@ -17,16 +17,16 @@ import { ReactNode } from 'react'
 const Links: Props[] = [
   {
     title: '| Cadastro',
-    link: '/signup'
+    link: '/signup',
   },
   {
     title: '| Login',
-    link: '/login'
+    link: '/login',
   },
   {
     title: '| Home',
-    link: '/'
-  }
+    link: '/',
+  },
 ]
 
 type Props = {
@@ -40,7 +40,7 @@ const NavLink = ({ title, link }: Props) => (
     rounded={'md'}
     _hover={{
       textDecoration: 'none',
-      bg: 'purple.500'
+      bg: 'purple.500',
     }}
     color='white'
     href={link}
@@ -84,7 +84,7 @@ export default function Navbar() {
                 fontWeight='bold'
                 _hover={{
                   textDecoration: 'none',
-                  bg: ''
+                  bg: '',
                 }}
                 href={'/'}
               >

@@ -8,7 +8,7 @@ import {
   StatNumber,
 } from '@chakra-ui/react'
 import { IAmounts } from '../../interface'
-import Title from '../Title'
+import Header from '../Header'
 
 type Props = {
   amounts: IAmounts[]
@@ -18,6 +18,7 @@ const Amount = ({ amounts, amountUser }: Props) => {
   return (
     <Flex justify={['center']} p={2}>
       <Container maxW='container.xl' centerContent>
+        <Header text={amountUser} />
         <Stack direction={['column', 'row']} spacing='24px'>
           {amounts.map((amount) => (
             <Stat
