@@ -5,5 +5,6 @@ export interface IUser {
   category: string[]
   email: string
   password: string
+  amount: string[]
   createdAt?: string
 }
