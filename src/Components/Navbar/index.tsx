@@ -8,25 +8,10 @@ import {
   useDisclosure
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
+import { useContext } from 'react'
+import { AuthContext } from '../../Context/AuthContext'
+import LoggedUser from '../LoggedUser'
 
-const Links: Props[] = [
-  {
-    title: '| Cadastro',
-    link: '/signup',
-  },
-  {
-    title: '| Login',
-    link: '/login',
-  },
-  {
-    title: '| Home',
-    link: '/',
-  },
-  {
-    title: '| Gráficos',
-    link: '/analytics',
-  }
-]
 
 type Props = {
   title: string
@@ -52,6 +37,26 @@ export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { colorMode, toggleColorMode } = useColorMode()
   const router = useRouter()
+  const { user } = useContext(AuthContext)
+
+  const Links: Props[] = [
+    {
+      title: '| Cadastro',
+      link: '/signup',
+    },
+    {
+      title: '| Login',
+      link: '/login',
+    },
+    {
+      title: '| Home',
+      link: '/',
+    },
+    {
+      title: '| Gráficos',
+      link: '/analytics',
+    }
+  ]
   return (
     <>
       <Box bg='#7049c3' px={4}>
@@ -93,7 +98,7 @@ export default function Navbar() {
           </Flex>
         </Flex>
       </Box>
-
+      {user && <LoggedUser username={user?.name} email={user?.email} surname={user?.surname} />}
       {isOpen ? (
         <Box pb={4} display={{ md: 'none' }} bg='#7049c3'>
           <Stack as={'nav'} spacing={4}>

@@ -3,12 +3,15 @@ import {
   MenuButton, MenuItem, MenuList, Stack,
   useColorMode, useDisclosure
 } from '@chakra-ui/react'
+import { destroyCookies } from '../../Context/AuthContext'
 
 type Props = {
   username: string
   avatarUser?: string
+  email: string
+  surname?: string
 }
-const LoggedUser = ({username, avatarUser}:Props) => {
+const LoggedUser = ({ username, avatarUser, email, surname }: Props) => {
   const { colorMode, toggleColorMode } = useColorMode()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const defaultAvatar = 'https://avatars.dicebear.com/api/big-ears/your-custom-seed.svg?b=%23cc0ae6'
@@ -37,11 +40,14 @@ const LoggedUser = ({username, avatarUser}:Props) => {
                   </Center>
                   <br />
                   <Center>
-                    <p>{username}</p>
+                    <p>{username} {" - " + surname}</p>
+                  </Center>
+                  <Center>
+                    <p>{email}</p>
                   </Center>
                   <br />
-              
-                  <Link href='/'>
+
+                  <Link href='/' onClick={() => destroyCookies()}>
                     <MenuItem>Sair</MenuItem>
                   </Link>
                 </MenuList>

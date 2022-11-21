@@ -9,3 +9,11 @@ export const GetAmounts = () => {
       .then((response) => response.data)
   )
 }
+
+export const GetAmountUser = (coins: string) => {
+  return useQuery(['amountsUser'], () =>
+    baseUrlGlobal
+      .get<IAmounts[]>(`/v1/amount/${coins}`)
+      .then((response) => response.data)
+  )
+}

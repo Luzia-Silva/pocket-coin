@@ -1,6 +1,6 @@
 import { IAmounts } from './IAmounts'
-import { IAuth } from './IAuth'
+import { ILogin } from './ILogin'
 import { INews } from './INews/index'
 import { IUser } from './IUser/index'
 
-export type { IAmounts, IUser, INews, IAuth }
+export type { IAmounts, IUser, INews, ILogin }

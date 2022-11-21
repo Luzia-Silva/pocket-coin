@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify'
 
 import 'react-toastify/dist/ReactToastify.css'
 import Navbar from '../Components/Navbar'
+import { AuthProvider } from '../Context/AuthContext'
 import { theme } from '../styles/theme'
 import * as gtag from '../utils/gtag'
 const queryClient = new QueryClient()
@@ -25,13 +26,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router.events])
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ChakraProvider theme={theme}>
-        <Navbar />
-        <ToastContainer />
-        <Component {...pageProps} />
-      </ChakraProvider>
-    </QueryClientProvider>
+    <AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <ChakraProvider theme={theme}>
+          <Navbar />
+          <ToastContainer />
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </QueryClientProvider>
+    </AuthProvider>
+
   )
 }
 

@@ -19,7 +19,8 @@ import {
   Text, Th,
   Thead,
   Tr,
-  useCheckboxGroup, useToast
+  useCheckboxGroup, useToast,
+  Image
 } from '@chakra-ui/react'
 import { useState } from 'react'
 
@@ -80,14 +81,23 @@ const SignUp = () => {
   const onSubmit: SubmitHandler<IUser> = (data) => mutate(data)
   return (
     <Box m={6}>
-      <Stack justifyContent='center' spacing={4} m="10px auto">
-        <Heading fontSize={'4xl'} textAlign={'center'}>
-          Inscreva-se
-        </Heading>
-        <Text fontSize={'lg'} color={'gray.600'} textAlign='center' >
-          Seja <b>Pocket coin forever</b> e aproveite todas as novidades
-          quentinhas 😍✨
-        </Text>
+      <Stack spacing={4} m="10px auto" >
+        <Flex justifyContent="center">
+          <Image
+            boxSize={{ base: '50px', md: '60px', lg: '60px' }}
+            objectFit='cover'
+            src='../logo.png'
+            alt='Logo money'
+          />
+          <Text
+            textAlign='center'
+            fontSize={{ base: '2rem', md: '3rem', lg: '3rem' }}
+            color='black'
+            fontWeight='bold'
+          >
+            Pocket Coin
+          </Text>
+        </Flex>
       </Stack>
       <Box
         borderWidth="1px"

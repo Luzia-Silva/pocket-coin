@@ -26,7 +26,7 @@ const CategoryNewsTabList = ({ user, newsAll }: Props) => {
     <>
       <Title title={'Notícias relacionadas a sua preferência'} />
       <Tabs variant='soft-rounded' colorScheme='purple' isLazy m={2}>
-        <TabList>
+        <TabList flexDirection={['column', 'row']}>
           <Tab onClick={() => handleClickNews('')}>Todas</Tab>
           {user.category?.map((category, index) => (
             <Tab key={index} onClick={() => handleClickNews(category)}>

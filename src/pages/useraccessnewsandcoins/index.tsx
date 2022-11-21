@@ -1,25 +1,36 @@
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { Box, Flex } from '@chakra-ui/react'
+import { useContext, useEffect, useState } from 'react'
+import AllNews from '../../Components/AllNews'
 import Amount from '../../Components/Amount'
-import CardNews from '../../Components/CardNews'
 import CategoryNewsTabList from '../../Components/CategoryNewsTabList'
+import { AuthContext } from '../../Context/AuthContext'
 import { Users } from '../../mock'
 import { queries } from '../../services/queries'
 
 const UserAccessNewsAndCoins = () => {
+  const { user } = useContext(AuthContext)
   const { data: news } = queries.GetNews()
-  const { data: coins } = queries.GetAmounts()
-  const [amountUser, setAmountUser] = useState<any>()
+  const { data: amount } = queries.GetAmounts()
+  const { data: amountUser } = queries.GetAmountUser('USD-BRL,EUR-BRL,BTC-BRL,JPY-BRL,CNY-BRL,ILS-USD')
+  const [coins, setCoins] = useState<any>()
   useEffect(() => {
-    setAmountUser(localStorage.getItem('amount'))
+    setCoins(localStorage.getItem('amount'))
   }, [])
 
   return (
-    <>
-      <Amount amounts={coins || []} amountUser={amountUser} />
-      <CategoryNewsTabList user={Users} newsAll={news || []} />
-    </>
+    <Box>
+      {user ? (
+        <>
+          <Amount amounts={amountUser || []} coins={coins} />
+          <CategoryNewsTabList user={user} newsAll={news || []} />
+        </>
+      ) : (
+        <>
+          <Amount amounts={amount || []} coins={coins} />
+          <AllNews news={news || []} />
+        </>
+      )}
+    </Box>
   )
 }
 export default UserAccessNewsAndCoins

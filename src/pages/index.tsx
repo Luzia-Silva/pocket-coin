@@ -9,18 +9,21 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next/types'
 import WithSpeechBubbles from '../Components/Testimonials'
+import { AuthContext } from '../Context/AuthContext'
 
 const Home: NextPage = () => {
   const router = useRouter()
+  const { user } = useContext(AuthContext)
   const [amount, setAmount] = useState<string>('')
   const handleLocalStorage = () => {
     localStorage.setItem('amount', amount)
     router.push('/useraccessnewsandcoins')
   }
+
   return (
     <>
       <Flex

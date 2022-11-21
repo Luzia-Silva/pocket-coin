@@ -22,6 +22,7 @@
     "jssoup": "^0.0.15",
     "lib": "^4.3.3",
     "next": "12.1.6",
+    "nookies": "^2.5.2",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
     "react-ga": "^3.3.1",
@@ -36,6 +37,7 @@
     "yup-password": "^0.2.2"
   },
   "devDependencies": {
+    "@types/cookie": "^0.5.1",
     "@types/express": "^4.17.13",
     "@types/gtag.js": "^0.0.10",
     "@types/node": "18.0.0",

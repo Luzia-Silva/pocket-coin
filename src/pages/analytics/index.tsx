@@ -1,4 +1,4 @@
-import { Box, Heading, Highlight } from "@chakra-ui/react";
+import { Box, Heading, Highlight, Text, Badge } from "@chakra-ui/react";
 import React from "react";
 import { Chart } from "react-google-charts";
 import { queries } from "../../services/queries";
@@ -21,10 +21,13 @@ const Analytics = () => {
     <Box bgColor="white" mt={5}>
       <Box textAlign="center">
         <Heading fontSize='3xl'>Notícias por categorias </Heading>
-        <Highlight query={['dataset.', '50']} styles={{ px: '2', py: '1', rounded: 'full', bg: 'purple.100' }}>
-          Este gráfico representa  50 notícias recentes em
+        <Text fontSize='md'>
+          Este gráfico representa
+          <Badge borderRadius='full' colorScheme='purple' fontSize='md' m={2} p={2}>
+            {news?.length} notícias
+          </Badge>  recentes em
           relação a recorrência de suas categorias pelo dataset.
-        </Highlight>
+        </Text>
       </Box>
       <Chart chartType="ColumnChart" width="100%" height="400px" data={data} />
 

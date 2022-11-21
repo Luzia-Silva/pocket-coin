@@ -1,15 +1,11 @@
 import {
-  Button,
-  FormControl,
-  Flex,
-  Heading,
+  Button, Flex, FormControl, Heading,
   Input,
   Stack,
   Text,
-  useColorModeValue,
+  useColorModeValue
 } from '@chakra-ui/react'
 import React from 'react'
-import { event } from 'react-ga'
 
 type IEmailconfirm = {
   target: {
