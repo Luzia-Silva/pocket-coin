@@ -1,22 +1,23 @@
 import { Box, Heading, Highlight, Text, Badge } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 import { Chart } from "react-google-charts";
+import { AuthContext } from "../../Context/AuthContext";
 import { queries } from "../../services/queries";
-
 
 const Analytics = () => {
   const { data: news } = queries.GetNews()
-  const data = [
-    ["Element", "Categorias", { role: "blue" }],
-    ["Mercados", 10, ""],
-    ["Um conteúdo Bússola", 20, ""],
-    ["Pop", 19.3, ""],
-    ["Mundo", 10.45, ""],
-    ["Brasil", 8.45, ""],
-    ["Economia", 20, ""],
-    ["Future of Money", 15.45, ""],
-    ["Dinheiro e tendências", 11, ""],
-  ];
+  const { user } = useContext(AuthContext)
+  function DataNews(data: string) {
+    const newsSize = news?.filter((e) => e.category === data)
+    const newsName = news?.find((e) => e.category === data)
+    return [newsName?.category, newsSize?.length, ""]
+  }
+  const categoriesNews = news?.map((news) => news.category)
+  const newsArray = categoriesNews?.filter(function (elem, index, self) {
+    return index === self.indexOf(elem);
+  })
+  const data: any = newsArray?.map((news) => DataNews(news))
+  const elementNews = data?.unshift(["Notícias", "Categorias", { "role": "blue" }])
   return (
     <Box bgColor="white" mt={5}>
       <Box textAlign="center">
@@ -29,7 +30,12 @@ const Analytics = () => {
           relação a recorrência de suas categorias pelo dataset.
         </Text>
       </Box>
-      <Chart chartType="ColumnChart" width="100%" height="400px" data={data} />
+      <Chart
+        chartType="ColumnChart"
+        data={data}
+        width={"100%"}
+        height={"400px"}
+      />
 
     </Box>
   );

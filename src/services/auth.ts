@@ -1,6 +1,4 @@
-import axios from 'axios'
 import baseUrlGlobal from './baseUrlGlobal'
-import { queries } from './queries'
 
 type SignInRequestData = {
   email: string
