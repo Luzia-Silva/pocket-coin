@@ -1,10 +1,13 @@
 import { Box, Heading, Highlight, Text, Badge } from "@chakra-ui/react";
+import { Router } from "express";
+import { useRouter } from "next/router";
 import React, { useContext } from "react";
 import { Chart } from "react-google-charts";
 import { AuthContext } from "../../Context/AuthContext";
 import { queries } from "../../services/queries";
 
 const Analytics = () => {
+  const router = useRouter()
   const { data: news } = queries.GetNews()
   const { user } = useContext(AuthContext)
   function DataNews(data: string) {
@@ -18,6 +21,7 @@ const Analytics = () => {
   })
   const data: any = newsArray?.map((news) => DataNews(news))
   const elementNews = data?.unshift(["Notícias", "Categorias", { "role": "blue" }])
+
   return (
     <Box bgColor="white" mt={5}>
       <Box textAlign="center">
@@ -39,5 +43,6 @@ const Analytics = () => {
 
     </Box>
   );
+
 }
 export default Analytics
