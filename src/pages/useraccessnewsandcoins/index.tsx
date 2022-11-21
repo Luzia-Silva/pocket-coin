@@ -11,8 +11,9 @@ const UserAccessNewsAndCoins = () => {
   const { user } = useContext(AuthContext)
   const { data: news } = queries.GetNews()
   const { data: amount } = queries.GetAmounts()
-  const { data: amountUser } = queries.GetAmountUser('USD-BRL,EUR-BRL,BTC-BRL,JPY-BRL,CNY-BRL,ILS-USD')
+  const { data: amountUser } = queries.GetAmountUser(user?.amount.join())
   const [coins, setCoins] = useState<any>()
+
   useEffect(() => {
     setCoins(localStorage.getItem('amount'))
   }, [])
