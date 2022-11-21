@@ -7,8 +7,8 @@ export const CreateUser = (props: Object) => {
     await baseUrlGlobal.post('/v1/user', data)
   }, props)
 }
-export const AuthUser = (props: Object) => {
+export const Login = (props: Object) => {
   return useMutation(async (data: IAuth) => {
-    await baseUrlGlobal.post('/v1/auth', data)
+    await baseUrlGlobal.post('/v1/login', data)
   }, props)
 }

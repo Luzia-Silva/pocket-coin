@@ -1,3 +1,4 @@
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
@@ -7,6 +8,8 @@ import {
   FormLabel,
   Heading,
   Input,
+  InputGroup,
+  InputRightElement,
   Link,
   Stack,
   Text,
@@ -15,6 +18,7 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup'
 import { AxiosError } from 'axios'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import * as yup from 'yup'
@@ -35,9 +39,9 @@ const schema = yup
 
 const Login = () => {
   const router = useRouter()
-  const { mutate } = queries.AuthUser({
+  const [showPassword, setShowPassword] = useState(false)
+  const { mutate } = queries.Login({
     onSuccess: () => {
-      // router.push('/welcome')
       toast.success('sucesso')
     },
     onError: (error: AxiosError) => {
@@ -94,11 +98,25 @@ const Login = () => {
                 </FormControl>
                 <FormControl id='password'>
                   <FormLabel>Senha</FormLabel>
-                  <Input
-                    type='password'
-                    {...register('password')}
-                    isInvalid={errors.email?.type ? true : false}
-                  />
+                  <InputGroup>
+                    <Input
+                      {...register('password')}
+                      isInvalid={errors.email?.type ? true : false}
+                      type={showPassword ? 'text' : 'password'}
+                      {...register('password')}
+                    />
+                    <InputRightElement h={'full'}>
+                      <Button
+                        variant={'ghost'}
+                        type='submit'
+                        onClick={() =>
+                          setShowPassword((showPassword) => !showPassword)
+                        }
+                      >
+                        {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
                   <Text fontSize={'xs'} color='red'>
                     {errors.password?.message}
                   </Text>

@@ -1,18 +1,13 @@
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 import {
-  Box,
-  Button,
-  Flex,
+  Box, Flex,
   HStack,
   IconButton,
   Link,
-  Stack,
-  Text,
-  useColorMode,
-  useDisclosure,
+  Stack, useColorMode,
+  useDisclosure
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { ReactNode } from 'react'
 
 const Links: Props[] = [
   {
@@ -27,6 +22,10 @@ const Links: Props[] = [
     title: '| Home',
     link: '/',
   },
+  {
+    title: '| Gráficos',
+    link: '/analytics',
+  }
 ]
 
 type Props = {

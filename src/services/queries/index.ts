@@ -1,6 +1,5 @@
-import { AuthUser } from './Users/index'
 import { GetAmounts } from './Amounts/index'
 import { GetNews } from './News'
-import { CreateUser } from './Users'
+import { CreateUser, Login } from './Users'
 
-export const queries = { CreateUser, GetNews, GetAmounts, AuthUser }
+export const queries = { CreateUser, GetNews, GetAmounts, Login }
