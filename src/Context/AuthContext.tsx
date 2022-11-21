@@ -23,8 +23,9 @@ export function AuthProvider({ children }: any) {
   const isAuthenticated = !!user
   useEffect(() => {
     const { 'pocketcoin-token': token } = parseCookies()
+    const userId = localStorage.getItem('userId')
     if (token) {
-      recoverUserInformation().then(response => setUser(response.user))
+      recoverUserInformation(userId || "").then(response => setUser(response))
     }
   }, [])
   async function signIn({ email, password }: SignInData) {
