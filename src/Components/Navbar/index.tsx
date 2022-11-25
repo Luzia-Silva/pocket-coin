@@ -1,48 +1,113 @@
-import { ArrowBackIcon, SearchIcon } from '@chakra-ui/icons';
+import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 import {
-  Box,
-  Flex, Link, Stack,
-  useColorMode, useColorModeValue, useDisclosure, Image, IconButton, Avatar, Text
-} from '@chakra-ui/react';
-import { ReactNode } from 'react';
+  Box, Flex,
+  HStack,
+  IconButton,
+  Link,
+  Stack, useColorMode,
+  useDisclosure
+} from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+import { useContext } from 'react'
+import { AuthContext } from '../../Context/AuthContext'
+import LoggedUser from '../LoggedUser'
 
-const Navbar = ({ children }: { children: ReactNode }) => (
+
+type Props = {
+  title: string
+  link: string
+}
+const NavLink = ({ title, link }: Props) => (
   <Link
     px={2}
     py={1}
     rounded={'md'}
     _hover={{
       textDecoration: 'none',
-      bg: '#7049c3',
+      bg: 'purple.500',
     }}
-    href={'#'}>
-    {children}
+    color='white'
+    href={link}
+  >
+    {title}
   </Link>
-);
+)
 
-export default function Nav() {
-  const { colorMode, toggleColorMode } = useColorMode();
+export default function Navbar() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { colorMode, toggleColorMode } = useColorMode()
+  const router = useRouter()
+  const { user } = useContext(AuthContext)
+
+  const Links: Props[] = [
+    {
+      title: '| Cadastro',
+      link: '/signup',
+    },
+    {
+      title: '| Login',
+      link: '/login',
+    },
+    {
+      title: '| Home',
+      link: '/',
+    },
+    {
+      title: '| Gráficos',
+      link: '/analytics',
+    }
+  ]
   return (
     <>
       <Box bg='#7049c3' px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+          <IconButton
+            size={'md'}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label={'Open Menu'}
+            display={{ md: 'none' }}
+            onClick={isOpen ? onClose : onOpen}
+          />
           <Box>
-            <Link href={'/'}>
-              <Avatar bg='#e8e7e7' icon={<ArrowBackIcon fontSize='1.5rem' />} />
-            </Link>
+            <HStack
+              as={'nav'}
+              spacing={4}
+              display={{ base: 'none', md: 'flex' }}
+            >
+              {Links.map((link, index) => (
+                <NavLink key={index} link={link.link} title={link.title} />
+              ))}
+            </HStack>
           </Box>
-          <Flex >
+          <Flex>
             <Stack direction={'row'} spacing={7}>
-             <Text textAlign="right"
-            fontSize={'1.5rem'}
-            color='white'
-            fontWeight="bold">
-            Pocket Coin
-        </Text>
+              <Link
+                textAlign='right'
+                fontSize={'1.5rem'}
+                color='white'
+                fontWeight='bold'
+                _hover={{
+                  textDecoration: 'none',
+                  bg: '',
+                }}
+                href={'/'}
+              >
+                Pocket Coin
+              </Link>
             </Stack>
           </Flex>
         </Flex>
       </Box>
+      {user && <LoggedUser username={user?.name} email={user?.email} surname={user?.surname} />}
+      {isOpen ? (
+        <Box pb={4} display={{ md: 'none' }} bg='#7049c3'>
+          <Stack as={'nav'} spacing={4}>
+            {Links.map((link, index) => (
+              <NavLink key={index} link={link.link} title={link.title} />
+            ))}
+          </Stack>
+        </Box>
+      ) : null}
     </>
-  );
+  )
 }

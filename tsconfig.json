@@ -20,6 +20,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/styles/theme.js", "src/services/index.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/styles/theme.js", "src/services/index.js", "src/Context/AuthContext/index.tsx"],
   "exclude": ["node_modules"]
 }
