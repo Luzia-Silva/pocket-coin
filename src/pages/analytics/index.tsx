@@ -20,7 +20,7 @@ const Analytics = () => {
     return index === self.indexOf(elem);
   })
   const data: any = newsArray?.map((news) => DataNews(news))
-  const elementNews = data?.unshift(["Notícias", "Categorias", { "role": "blue" }])
+  const elementNews = data?.unshift(["Notícias", "Percentual", { "role": "blue" }])
 
 
   if (isLoading) return (

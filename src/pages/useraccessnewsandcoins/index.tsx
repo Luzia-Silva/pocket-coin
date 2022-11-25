@@ -1,10 +1,9 @@
-import { Box, Flex } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { useContext, useEffect, useState } from 'react'
 import AllNews from '../../Components/AllNews'
 import Amount from '../../Components/Amount'
 import CategoryNewsTabList from '../../Components/CategoryNewsTabList'
 import { AuthContext } from '../../Context/AuthContext'
-import { Users } from '../../mock'
 import { queries } from '../../services/queries'
 
 const UserAccessNewsAndCoins = () => {

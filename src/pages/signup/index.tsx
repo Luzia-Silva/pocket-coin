@@ -56,7 +56,7 @@ const SignUp = () => {
 
     }
   })
-  const { data: coins } = queries.GetAmounts()
+  const { data: coins } = queries.GetAmountList()
   const { data: newsAll } = queries.GetNews()
   const { value, getCheckboxProps } = useCheckboxGroup()
   const news = newsAll?.map((news) => news.category)
