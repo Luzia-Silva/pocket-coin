@@ -1,37 +1,46 @@
-import { Box, Heading, Highlight, Text, Badge } from "@chakra-ui/react";
-import { Router } from "express";
+import { Badge, Box, Center, Heading, Spinner, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Chart } from "react-google-charts";
 import { AuthContext } from "../../Context/AuthContext";
 import { queries } from "../../services/queries";
 
 const Analytics = () => {
   const router = useRouter()
-  const { data: news } = queries.GetNews()
+  const { data: news, isLoading } = queries.GetNews()
   const { user } = useContext(AuthContext)
   function DataNews(data: string) {
     const newsSize = news?.filter((e) => e.category === data)
     const newsName = news?.find((e) => e.category === data)
-    return [newsName?.category, newsSize?.length, ""]
+    const porcentageNumber = (Number(newsSize?.length) / Number(news?.length)) * 100
+    return [newsName?.category, porcentageNumber, ""]
   }
   const categoriesNews = news?.map((news) => news.category)
   const newsArray = categoriesNews?.filter(function (elem, index, self) {
     return index === self.indexOf(elem);
   })
   const data: any = newsArray?.map((news) => DataNews(news))
-  const elementNews = data?.unshift(["Notícias", "Categorias", { "role": "blue" }])
+  const elementNews = data?.unshift(["Notícias", "Percentual", { "role": "blue" }])
 
+
+  if (isLoading) return (
+    <Center mt={8}>
+      <Spinner
+        thickness='4px'
+        speed='0.65s'
+        emptyColor='gray.200'
+        color='purple.300'
+        size='xl'
+      />
+    </Center>
+  )
   return (
     <Box bgColor="white" mt={5}>
       <Box textAlign="center">
         <Heading fontSize='3xl'>Notícias por categorias </Heading>
-        <Text fontSize='md'>
-          Este gráfico representa
-          <Badge borderRadius='full' colorScheme='purple' fontSize='md' m={2} p={2}>
-            {news?.length} notícias
-          </Badge>  recentes em
-          relação a recorrência de suas categorias pelo dataset.
+        <Text fontSize='md' mt={3}>
+          Este gráfico representa o percentual do total de
+          {''} {news?.length} notícias recentes.
         </Text>
       </Box>
       <Chart

@@ -1,18 +1,18 @@
-import { Box, Flex } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { useContext, useEffect, useState } from 'react'
 import AllNews from '../../Components/AllNews'
 import Amount from '../../Components/Amount'
 import CategoryNewsTabList from '../../Components/CategoryNewsTabList'
 import { AuthContext } from '../../Context/AuthContext'
-import { Users } from '../../mock'
 import { queries } from '../../services/queries'
 
 const UserAccessNewsAndCoins = () => {
   const { user } = useContext(AuthContext)
   const { data: news } = queries.GetNews()
   const { data: amount } = queries.GetAmounts()
-  const { data: amountUser } = queries.GetAmountUser('USD-BRL,EUR-BRL,BTC-BRL,JPY-BRL,CNY-BRL,ILS-USD')
+  const { data: amountUser } = queries.GetAmountUser(user?.amount.join())
   const [coins, setCoins] = useState<any>()
+
   useEffect(() => {
     setCoins(localStorage.getItem('amount'))
   }, [])

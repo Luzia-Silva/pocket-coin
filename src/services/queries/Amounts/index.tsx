@@ -17,3 +17,12 @@ export const GetAmountUser = (coins: string) => {
       .then((response) => response.data)
   )
 }
+
+export const GetAmountList = () => {
+  return useQuery(['amountsUser'], () =>
+    baseUrlGlobal
+      .get<IAmounts[]>(`/v1/list`)
+      .then((response) => response.data)
+  )
+}
+
