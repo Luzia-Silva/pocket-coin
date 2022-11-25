@@ -4,7 +4,7 @@ import { parseCookies } from 'nookies'
 const { 'pocketcoin-token': token } = parseCookies()
 
 const baseUrlGlobal = axios.create({
-  baseURL: process.env.API_POCKETCOIN|| 'http://localhost:7777',
+  baseURL: 'https://pocketcoin-api.herokuapp.com/',
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`,
