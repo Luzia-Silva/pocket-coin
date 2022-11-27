@@ -49,24 +49,7 @@ const Login = () => {
     resolver: yupResolver(schema),
   })
   const { signIn } = useContext(AuthContext)
-  // const { mutate } = queries.Login({
-  //   onSuccess: () => {
-  //     toast.success('sucesso')
-  //   },
-  //   onError: (error: AxiosError) => {
-  //     switch (error.code) {
-  //       case 'ERR_BAD_REQUEST':
-  //         toast.error('Não encontramos o seu login!')
-  //         break
-  //       case 'ERR_NETWORK':
-  //         toast.error('Senha incorreta!')
-  //         break
-  //       default:
-  //         toast.error('Ocorreu um erro!')
-  //         break
-  //     }
-  //   },
-  // })
+
 
   function onSubmit(data: IFormInputs) {
     signIn(data)

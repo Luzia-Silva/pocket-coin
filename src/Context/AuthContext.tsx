@@ -5,6 +5,10 @@ import { useRouter } from "next/router";
 import { recoverUserInformation, signInRequest } from "../services/auth";
 import { IUser } from "../interface";
 import Router from "react-router"
+import { useMutation } from "@tanstack/react-query";
+import baseUrlGlobal from "../services/baseUrlGlobal";
+import { AxiosError } from "axios";
+import Error from "next/error";
 
 type SignInData = {
   email: string
@@ -38,7 +42,6 @@ export function AuthProvider({ children }: any) {
     })
     setUser(user)
 
-    router.push("/")
   }
   return (
     <AuthContext.Provider value={{ user, isAuthenticated, signIn }}>
