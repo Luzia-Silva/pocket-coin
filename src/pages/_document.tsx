@@ -13,6 +13,7 @@ export default class MyDocument extends Document {
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
           />
+          <link  rel="icon" type="image/x-icon" href="../../assets/favicon/logo.ico" />
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -24,6 +25,7 @@ export default class MyDocument extends Document {
               });
           `
             }}/>
+          <title>Pocket Coin</title>
         </Head>
         <body>
 
