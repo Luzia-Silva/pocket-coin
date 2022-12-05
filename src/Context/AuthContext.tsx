@@ -1,14 +1,9 @@
-import { createContext, useEffect, useState } from "react";
-import { destroyCookie, parseCookies, setCookie } from "nookies";
 import { useRouter } from "next/router";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
+import { createContext, useEffect, useState } from "react";
 
-import { recoverUserInformation, signInRequest } from "../services/auth";
 import { IUser } from "../interface";
-import Router from "react-router"
-import { useMutation } from "@tanstack/react-query";
-import baseUrlGlobal from "../services/baseUrlGlobal";
-import { AxiosError } from "axios";
-import Error from "next/error";
+import { recoverUserInformation, signInRequest } from "../services/auth";
 
 type SignInData = {
   email: string
