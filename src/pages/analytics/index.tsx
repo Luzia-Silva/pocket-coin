@@ -2,13 +2,16 @@ import { Badge, Box, Center, Heading, Spinner, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { Chart } from "react-google-charts";
+import DataLoading from "../../Components/DataLoading";
 import { AuthContext } from "../../Context/AuthContext";
 import { queries } from "../../services/queries";
 
 const Analytics = () => {
+
+  const { data: news, isLoading, isError } = queries.GetNews()
+
   const router = useRouter()
-  const { data: news, isLoading } = queries.GetNews()
-  const { user } = useContext(AuthContext)
+
   function DataNews(data: string) {
     const newsSize = news?.filter((e) => e.category === data)
     const newsName = news?.find((e) => e.category === data)
@@ -22,25 +25,18 @@ const Analytics = () => {
   const data: any = newsArray?.map((news) => DataNews(news))
   const elementNews = data?.unshift(["Notícias", "Percentual", { "role": "blue" }])
 
+  if (!news)
+    return (
+      <DataLoading isLoading={isLoading} isError={isError} />
+    )
 
-  if (isLoading) return (
-    <Center mt={8}>
-      <Spinner
-        thickness='4px'
-        speed='0.65s'
-        emptyColor='gray.200'
-        color='purple.300'
-        size='xl'
-      />
-    </Center>
-  )
   return (
     <Box bgColor="white" mt={5}>
       <Box textAlign="center">
         <Heading fontSize='3xl'>Notícias por categorias </Heading>
         <Text fontSize='md' mt={3}>
           Este gráfico representa o percentual do total de
-          {''} {news?.length} notícias recentes.
+          {''} {news?.length} notícias recentes
         </Text>
       </Box>
       <Chart
@@ -49,7 +45,6 @@ const Analytics = () => {
         width={"100%"}
         height={"400px"}
       />
-
     </Box>
   );
 
