@@ -12,7 +12,6 @@ import { theme } from '../styles/theme'
 import * as gtag from '../utils/gtag'
 const queryClient = new QueryClient()
 
-
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
